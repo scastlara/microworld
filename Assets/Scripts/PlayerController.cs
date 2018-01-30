@@ -74,6 +74,21 @@ public class PlayerController : MonoBehaviour {
 		if (coll.collider.tag == "Enemy") {
 			if (gameObject.tag == "Player1") {
 
+				// WILL IMPLEMENT HOST INVASION HERE. WILL BE CHANGED IN THE FUTURE
+				// FROM "ON COLLISION" TO "ON COLLISION WITH PROJECTILE"
+
+				// guardar atributos del enemigo
+
+				// destruir enemigo
+				Destroy(coll.gameObject.GetComponent("StickerEnemy"));
+				//Destroy(coll.gameObject.GetComponent("PursuerEnemy"));
+
+				// crear componente player solitario
+				coll.gameObject.AddComponent(typeof(PlayerController));
+
+				// añadir atributos a player 2 en base a los guardados
+
+				// TAKING DAMAGE WHEN TOUCHING ENEMIES
 				if (health > 0) {
 					if (!isInvincible (invTime)) {
 						health--;
