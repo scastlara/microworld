@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Player1
   - Player2
+  - Enemy
+  - redGem
   layers:
   - Default
   - TransparentFX
@@ -15,9 +17,9 @@ TagManager:
   - UI
   - 
   - 
-  - players
-  - 
-  - 
+  - Player1
+  - Player2
+  - Ground
   - 
   - 
   - 

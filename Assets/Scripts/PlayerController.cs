@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 	public bool isGrounded;
 	public int jumpsMax;
 	private int jumpsDone;
+	public int currGems = 0;
+	public int health = 3;
 	public KeyCode left;
 	public KeyCode right;
 	public KeyCode jump;
@@ -17,21 +19,24 @@ public class PlayerController : MonoBehaviour {
 	public Transform groundCheckPoint;
 	public LayerMask whatIsGround;
 	private Rigidbody2D theRB;
-
+	private bool invincible = false;
+	private int invTime = 3;
+	Animator anim;
+	private float collTime = -3;
 
 	void Start () {
 		theRB = GetComponent<Rigidbody2D> ();
 		jumpsDone = 0;
 	}
-	
+
 	void Update () {
+		isGrounded = Physics2D.OverlapCircle (groundCheckPoint.position, roundCheckRadius, whatIsGround);
+		//Debug.Log (groundCheckPoint.position);
+		isInvincible (invTime);
 
-		isGrounded = Physics2D.OverlapCircle (groundCheckPoint.position, roundCheckRadius);
-		Debug.Log (groundCheckPoint.position);
-
-		Debug.DrawLine (groundCheckPoint.position, theRB.transform.position, Color.blue, 100, false);
+		//Debug.DrawLine (groundCheckPoint.position, theRB.transform.position, Color.blue, 100, false);
 		if (!isGrounded) {
-			Debug.Log (isGrounded);
+			//Debug.Log (isGrounded);
 		}
 
 		if (isGrounded && (jumpsDone == jumpsMax)) {
@@ -51,5 +56,49 @@ public class PlayerController : MonoBehaviour {
 			jumpsDone++;
 		}
 
+	}
+
+	public bool isInvincible(int time) {
+		float currTime = Time.time;
+		if (currTime - collTime < time) {
+			invincible = true;
+		} else {
+			invincible = false;
+		}
+		//Debug.Log ("CURR_TIME: " + currTime);
+		//Debug.Log ("COLL_TIME: " + collTime);
+		//Debug.Log ("Invincibility is "+invincible);
+		return invincible;
+	}
+	void OnCollisionStay2D(Collision2D coll) {
+		if (coll.collider.tag == "Enemy") {
+			if (gameObject.tag == "Player1") {
+
+				if (health > 0) {
+					if (!isInvincible (invTime)) {
+						health--;
+						collTime = Time.time;
+						Debug.Log ("HERE WE ARE");
+						Debug.Log ("SMASH " + health + " lifes");
+					} else {
+						//Debug.Log ("YOU ARE SAFE");
+					}
+				} else {
+					Destroy (gameObject);
+				}
+
+			}
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D coll) {
+        Debug.Log(coll.collider.tag);
+		if (coll.collider.tag == "redGem") {
+            Debug.Log("HOLA");
+			currGems += 1;
+			Destroy (coll.gameObject);
+			Debug.Log (coll.collider.tag);
+
+		}
 	}
 }
