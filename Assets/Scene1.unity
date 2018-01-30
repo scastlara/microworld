@@ -5721,7 +5721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &512306337
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5930,7 +5930,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1084746094426328, guid: 3fd0c2c8a507c42aa8737592e2185712, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1084746094426328, guid: 3fd0c2c8a507c42aa8737592e2185712, type: 2}
       propertyPath: m_TagString
@@ -6003,7 +6003,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
