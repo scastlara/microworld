@@ -6,14 +6,13 @@ using UnityEngine;
 /// This enemy sticks to Player1, impedes his movement and
 /// acts as an Enemy generator. It is like a ""virus""
 /// replicating as long as it is in contact with Player1.
-public class StickerEnemy : PursuerEnemy {
+public class EnemySticker : PursuerEnemy {
 	private EnemyGenerator spawner;
 	private bool isStuck = false;
 	private float playerMoveSpeed;
 	private float spawnTime = 3f; // How long between each spawn.
 	public bool isParent = true; // Defines if gameObject is able to reproduce
 	public GameObject child;   // Contains instance to created child enemy
-	public string enemyType = "EnemySticker";
 
 	// Impedes his movement and jumping
 	void StickToTarget() {

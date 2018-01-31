@@ -26,7 +26,21 @@ public class PlayerController : MonoBehaviour {
 
 	void Start () {
 		theRB = GetComponent<Rigidbody2D> ();
-		jumpsDone = 0;
+		if (gameObject.tag == "Player2") {
+			jumpsDone = 0;
+			moveSpeed = 5;
+			jumpForce = 5;
+			jumpsMax = 1;
+			roundCheckRadius = 0.05f;
+			left = KeyCode.LeftArrow;
+			right = KeyCode.RightArrow;
+			jump = KeyCode.Space;
+			whatIsGround = LayerMask.NameToLayer("Ground");
+			foreach (Transform child in transform)
+			{
+				groundCheckPoint = child;
+			}
+		}
 	}
 
 	void Update () {
@@ -74,17 +88,7 @@ public class PlayerController : MonoBehaviour {
 		if (coll.collider.tag == "Enemy") {
 			if (gameObject.tag == "Player1") {
 
-				// WILL IMPLEMENT HOST INVASION HERE. WILL BE CHANGED IN THE FUTURE
-				// FROM "ON COLLISION" TO "ON COLLISION WITH PROJECTILE"
 
-				// guardar atributos del enemigo
-
-				// destruir enemigo
-				Destroy(coll.gameObject.GetComponent("StickerEnemy"));
-				//Destroy(coll.gameObject.GetComponent("PursuerEnemy"));
-
-				// crear componente player solitario
-				coll.gameObject.AddComponent(typeof(PlayerController));
 
 				// añadir atributos a player 2 en base a los guardados
 
